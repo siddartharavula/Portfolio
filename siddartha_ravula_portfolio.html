@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siddartha Ravula Portfolio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --accent:#a855f7;
+  --accent2:#7c3aed;
+  --glow:rgba(168,85,247,0.01);
+  --text:#7c3aed;
+  --muted:#9d86c7;
+  --border:rgba(168,85,247,0.2);
+  --surface:rgba(255,255,255,0.04);
+  --font-d:'Syne',sans-serif;
+  --font-m:'Space Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:black;color:var(--text);font-family:var(--font-d);overflow-x:hidden;line-height:1.6}
+
+canvas#bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:0.08}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.1rem 3.5rem;
+  background:rgba(10,6,20,0.75);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.logo{font-family:var(--font-m);font-size:0.9rem;color:var(--accent);letter-spacing:0.08em}
+nav ul{list-style:none;display:flex;gap:2.2rem}
+nav ul a{text-decoration:none;color:var(--muted);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
+nav ul a:hover{color:var(--accent)}
+
+.wrap{position:relative;z-index:10;max-width:1080px;margin:0 auto;padding:0 3.5rem}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:7rem;padding-bottom:4rem}
+.eyebrow{
+  font-family:var(--font-m);font-size:0.7rem;color:var(--accent);
+  letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:0.75rem;
+}
+.eyebrow::before{content:'';width:28px;height:1px;background:var(--accent)}
+h1.name{
+  font-size:clamp(3.2rem,9vw,7rem);font-weight:800;line-height:0.93;
+  letter-spacing:-0.035em;margin-bottom:1.5rem;
+  background:linear-gradient(135deg,#fff 0%,#d4aaff 40%,#818cf8 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{font-size:1rem;color:var(--muted);max-width:480px;line-height:1.85;margin-bottom:3rem}
+.btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.7rem 1.6rem;border-radius:50px;
+  font-family:var(--font-m);font-size:0.75rem;letter-spacing:0.05em;
+  text-decoration:none;cursor:pointer;border:none;transition:all 0.25s;
+}
+.btn-p{background:var(--accent);color:#0a0614;font-weight:700}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px var(--glow)}
+.btn-o{background:transparent;border:1px solid var(--border);color:var(--text)}
+.btn-o:hover{border-color:var(--accent);color:var(--accent)}
+
+/* STATS */
+.stats{
+  position:relative;z-index:10;
+  background:rgba(168,85,247,0.05);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:2rem 3.5rem;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;
+  max-width:1080px;margin:0 auto;
+}
+.sn{font-size:2rem;font-weight:800;font-family:var(--font-m);color:var(--accent);display:block}
+.sl{font-size:0.68rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.2rem}
+
+/* SECTIONS */
+.sec{padding:5.5rem 0}
+.sec-label{
+  font-size:0.68rem;font-family:var(--font-m);color:var(--accent);
+  letter-spacing:0.18em;text-transform:uppercase;margin-bottom:2.5rem;
+  display:flex;align-items:center;gap:1rem;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:4rem;align-items:start}
+.about-h{font-size:2.3rem;font-weight:800;line-height:1.15;margin-bottom:1.2rem;letter-spacing:-0.02em}
+.about-h span{color:var(--accent)}
+.about-p{color:var(--muted);font-size:0.9rem;line-height:1.9;margin-bottom:0.8rem}
+.info-row{display:flex;gap:1rem;padding:0.65rem 0;border-bottom:1px solid var(--border);font-size:0.82rem}
+.il{color:var(--muted);font-family:var(--font-m);font-size:0.68rem;min-width:95px}
+.iv{color:var(--text)}
+
+.code-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
+.cc{
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:1.1rem;text-align:center;transition:all 0.25s;
+}
+.cc:hover{border-color:var(--accent);transform:translateY(-3px)}
+.cp{font-family:var(--font-m);font-size:0.62rem;color:var(--muted);letter-spacing:0.1em;margin-bottom:0.5rem;text-transform:uppercase}
+.cn{font-size:1.7rem;font-weight:800;font-family:var(--font-m);color:var(--accent)}
+.clb{font-size:0.65rem;color:var(--muted);margin-top:0.2rem}
+
+/* SKILLS */
+.skills-g{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.sk-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  padding:1.4rem;transition:all 0.25s;
+}
+.sk-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.sk-cat{font-size:0.65rem;font-family:var(--font-m);color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.9rem}
+.chips{display:flex;flex-wrap:wrap;gap:0.4rem}
+.chip{
+  font-family:var(--font-m);font-size:0.65rem;padding:0.25rem 0.65rem;
+  border-radius:50px;background:rgba(168,85,247,0.1);
+  border:1px solid rgba(168,85,247,0.25);color:var(--accent);
+}
+.chip.b{background:rgba(129,140,248,0.1);border-color:rgba(129,140,248,0.25);color:#a5b4fc}
+.chip.g{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:var(--muted)}
+
+/* PROJECTS */
+.proj-g{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+.proj-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:1.8rem;transition:all 0.3s;position:relative;overflow:hidden;
+}
+.proj-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),#818cf8);
+  opacity:0;transition:opacity 0.3s;
+}
+.proj-card:hover{border-color:rgba(168,85,247,0.4);transform:translateY(-4px)}
+.proj-card:hover::before{opacity:1}
+.proj-icon{
+  width:40px;height:40px;border-radius:9px;
+  background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;margin-bottom:1rem;
+}
+.proj-title{font-size:1rem;font-weight:700;margin-bottom:0.65rem;letter-spacing:-0.01em}
+.proj-desc{font-size:0.82rem;color:var(--muted);line-height:1.7;margin-bottom:1rem}
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.35rem}
+.pt{
+  font-family:var(--font-m);font-size:0.6rem;padding:0.2rem 0.55rem;border-radius:4px;
+  background:rgba(129,140,248,0.1);border:1px solid rgba(129,140,248,0.2);color:#a5b4fc;
+}
+.proj-metric{
+  font-family:var(--font-m);font-size:0.68rem;color:var(--accent);
+  margin-top:0.9rem;padding-top:0.9rem;border-top:1px solid var(--border);
+}
+.proj-empty{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;border-style:dashed;opacity:0.4;
+}
+
+/* CERTS */
+.certs-g{display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem}
+.cert-c{
+  display:flex;align-items:center;gap:1rem;
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;
+  padding:1rem 1.2rem;transition:border-color 0.25s;
+}
+.cert-c:hover{border-color:rgba(168,85,247,0.4)}
+.cbadge{
+  width:34px;height:34px;border-radius:7px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+}
+.cbadge.ibm{background:rgba(20,100,255,0.15);border:1px solid rgba(20,100,255,0.3)}
+.cbadge.meta{background:rgba(0,120,255,0.12);border:1px solid rgba(0,120,255,0.25)}
+.cissuer{font-size:0.62rem;font-family:var(--font-m);color:var(--muted);letter-spacing:0.08em}
+.cname{font-size:0.8rem;font-weight:600;margin-top:0.12rem}
+
+/* CONTACT */
+#contact{background:rgba(168,85,247,0.03)}
+.contact-c{text-align:center;max-width:580px;margin:0 auto}
+.contact-c h2{font-size:2.8rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:1rem}
+.contact-c p{color:var(--muted);font-size:0.9rem;line-height:1.85;margin-bottom:2.5rem}
+.clinks{display:flex;justify-content:center;gap:0.8rem;flex-wrap:wrap}
+.clink{
+  display:flex;align-items:center;gap:0.6rem;
+  background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  padding:0.7rem 1.1rem;font-family:var(--font-m);font-size:0.72rem;
+  color:var(--muted);text-decoration:none;transition:all 0.2s;
+}
+.clink:hover{border-color:var(--accent);color:var(--accent)}
+
+footer{
+  position:relative;z-index:10;text-align:center;
+  padding:1.8rem;border-top:1px solid var(--border);
+  font-family:var(--font-m);font-size:0.68rem;color:var(--muted);
+}
+
+.fi{opacity:0;transform:translateY(20px);transition:opacity 0.65s ease,transform 0.65s ease}
+.fi.vis{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<nav>
+  <div class="logo">Siddartha Ravula</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certs">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="wrap">
+    <div class="eyebrow">B.Tech Information Technology · CGPA 8.61</div>
+    <h1 class="name">Siddartha<br>Ravula</h1>
+    <p class="hero-sub">Full-stack developer & ML enthusiast crafting scalable systems with FastAPI, MERN, and Python. 485+ competitive problems solved.</p>
+    <div class="btns">
+      <a href="#projects" class="btn btn-p">View Projects ↓</a>
+      <a href="#contact" class="btn btn-o">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats fi">
+  <div style="text-align:center"><span class="sn">260+</span><div class="sl">LeetCode Solved</div></div>
+  <div style="text-align:center"><span class="sn">225+</span><div class="sl">Smart Interviews</div></div>
+  <div style="text-align:center"><span class="sn">74%</span><div class="sl">ML Model Accuracy</div></div>
+  <div style="text-align:center"><span class="sn">8.61</span><div class="sl">CGPA</div></div>
+</div>
+
+<section id="about" class="sec">
+  <div class="wrap">
+    <div class="sec-label">About me</div>
+    <div class="about-grid fi">
+      <div>
+        <h2 class="about-h">Engineer by passion,<br><span>builder by practice</span></h2>
+        <p class="about-p">4th-year B.Tech student in Information Technology at GRIET, Hyderabad. I combine strong CS fundamentals with hands-on project experience across the full stack.</p>
+        <p class="about-p">My work spans REST API design with FastAPI, JWT-secured MERN applications, and machine learning pipelines. Driven by writing clean, efficient, and scalable code.</p>
+        <div>
+          <div class="info-row"><span class="il">Location</span><span class="iv">Hyderabad, India</span></div>
+          <div class="info-row"><span class="il">Email</span><span class="iv">siddartharavula2005@gmail.com</span></div>
+          <div class="info-row"><span class="il">Phone</span><span class="iv">+91 9381721583</span></div>
+          <div class="info-row"><span class="il">Education</span><span class="iv">GRIET Hyderabad — IT, 2023–Present</span></div>
+          <div class="info-row"><span class="il">Intermediate</span><span class="iv">Sri Chaitanya Jr. College — 97.2%</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-label" style="margin-top:0">Coding Profiles</div>
+        <div class="code-grid">
+          <div class="cc"><div class="cp">LeetCode</div><div class="cn">260+</div><div class="clb">Problems</div></div>
+          <div class="cc"><div class="cp">Smart Int.</div><div class="cn">225+</div><div class="clb">Problems</div></div>
+          <div class="cc"><div class="cp">CodeForces</div><div class="cn">900+</div><div class="clb">Rating</div></div>
+          <div class="cc"><div class="cp">CodeChef</div><div class="cn">150+</div><div class="clb">Solved</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-label">Technical Skills</div>
+    <div class="skills-g fi">
+      <div class="sk-card"><div class="sk-cat">Languages</div><div class="chips"><span class="chip">Python</span><span class="chip">Java</span><span class="chip">C</span><span class="chip">JavaScript</span></div></div>
+      <div class="sk-card"><div class="sk-cat">Frameworks</div><div class="chips"><span class="chip b">FastAPI</span><span class="chip b">React.js</span><span class="chip b">Node.js</span><span class="chip b">Express.js</span></div></div>
+      <div class="sk-card"><div class="sk-cat">Databases</div><div class="chips"><span class="chip g">MongoDB</span><span class="chip g">MySQL</span></div></div>
+      <div class="sk-card"><div class="sk-cat">Core Concepts</div><div class="chips"><span class="chip">DSA</span><span class="chip">OOP</span><span class="chip">DBMS</span><span class="chip">OS</span><span class="chip">REST APIs</span></div></div>
+      <div class="sk-card"><div class="sk-cat">Web & Tools</div><div class="chips"><span class="chip b">HTML</span><span class="chip b">CSS</span><span class="chip b">Git</span><span class="chip b">GitHub</span></div></div>
+      <div class="sk-card"><div class="sk-cat">Soft Skills</div><div class="chips"><span class="chip g">Communication</span><span class="chip g">Leadership</span><span class="chip g">Team Collab</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-label">Projects</div>
+    <div class="proj-g fi">
+      <div class="proj-card">
+        <div class="proj-icon">📊</div>
+        <div class="proj-title">Employee Performance Tracking</div>
+        <div class="proj-desc">Personal tracking system with data entry, viewing, and automated summary generation. JWT-based auth with structured data management for efficient record handling.</div>
+        <div class="proj-tags"><span class="pt">FastAPI</span><span class="pt">JWT Auth</span><span class="pt">Python</span><span class="pt">MongoDB</span></div>
+        <div class="proj-metric">↑ 75% reduction in manual tracking effort</div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-icon">🌊</div>
+        <div class="proj-title">Intelligent Borewell</div>
+        <div class="proj-desc">MERN-based success prediction model with User/Worker auth, 2-input prediction, and 18-field geo-data management using supervised learning for water depth prediction.</div>
+        <div class="proj-tags"><span class="pt">MERN Stack</span><span class="pt">ML</span><span class="pt">Python</span><span class="pt">JWT</span></div>
+        <div class="proj-metric">✦ 74% prediction accuracy for borewell & water depth</div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-icon">🎬</div>
+        <div class="proj-title">Freeze Movie Ticket</div>
+        <div class="proj-desc">Movie ticket booking with real-time seat selection, ticket booking, and freezing. QR-based verification for secure, efficient validation with optimized pricing.</div>
+        <div class="proj-tags"><span class="pt">MERN Stack</span><span class="pt">QR Verify</span><span class="pt">Real-time</span></div>
+        <div class="proj-metric">↓ 90% reduction in extra booking charges</div>
+      </div>
+      <div class="proj-card proj-empty">
+        <div style="font-size:2rem;margin-bottom:1rem">⊕</div>
+        <div style="font-size:0.85rem;color:var(--muted)">Next project loading...</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certs" class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-label">Certifications</div>
+    <div class="certs-g fi">
+      <div class="cert-c"><div class="cbadge ibm">🔷</div><div><div class="cissuer">IBM</div><div class="cname">Generative AI: Prompt Engineering Basics</div></div></div>
+      <div class="cert-c"><div class="cbadge ibm">🔷</div><div><div class="cissuer">IBM</div><div class="cname">Databases and SQL for Data Science with Python</div></div></div>
+      <div class="cert-c"><div class="cbadge meta">🟦</div><div><div class="cissuer">Meta</div><div class="cname">Programming in Python</div></div></div>
+      <div class="cert-c"><div class="cbadge ibm">🔷</div><div><div class="cissuer">IBM</div><div class="cname">Machine Learning with Python</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="sec">
+  <div class="wrap">
+    <div class="contact-c fi">
+      <div class="sec-label" style="justify-content:center;max-width:300px;margin:0 auto 2rem">Get in touch</div>
+      <h2>Let's build<br>something great</h2>
+      <p>Open to internships, collaborations, and interesting problems. Drop me a message anytime.</p>
+      <div class="clinks">
+        <a href="mailto:siddartharavula2005@gmail.com" class="clink">✉ siddartharavula2005@gmail.com</a>
+        <a href="tel:+919381721583" class="clink">📞 +91 93817XXXXX</a>
+        <a href="https://linkedin.com" class="clink">🔗 LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span style="color:var(--accent)">Siddartha Ravula</span> — Hyderabad, India · 2025
+</footer>
+
+<script>
+// Plasma shader background
+const canvas = document.getElementById('bg');
+const gl = canvas.getContext('webgl');
+
+function resize(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  gl.viewport(0,0,canvas.width,canvas.height);
+}
+window.addEventListener('resize',resize);
+resize();
+
+const vs=`attribute vec4 aVertexPosition;void main(){gl_Position=aVertexPosition;}`;
+const fs=`
+precision highp float;
+uniform vec2 iResolution;
+uniform float iTime;
+const float overallSpeed=0.2;
+const float gridSmoothWidth=0.015;
+const float axisWidth=0.05;
+const float majorLineWidth=0.025;
+const float minorLineWidth=0.0125;
+const float majorLineFrequency=5.0;
+const float minorLineFrequency=1.0;
+const float scale=5.0;
+const vec4 lineColor=vec4(0.55,0.2,0.95,1.0);
+const float minLineWidth=0.01;
+const float maxLineWidth=0.2;
+const float lineSpeed=1.0*overallSpeed;
+const float lineAmplitude=1.0;
+const float lineFrequency=0.2;
+const float warpSpeed=0.2*overallSpeed;
+const float warpFrequency=0.5;
+const float warpAmplitude=1.0;
+const float offsetFrequency=0.5;
+const float offsetSpeed=1.33*overallSpeed;
+const float minOffsetSpread=0.6;
+const float maxOffsetSpread=2.0;
+const int linesPerGroup=16;
+#define drawCircle(pos,radius,coord) smoothstep(radius+gridSmoothWidth,radius,length(coord-(pos)))
+#define drawSmoothLine(pos,halfWidth,t) smoothstep(halfWidth,0.0,abs(pos-(t)))
+#define drawCrispLine(pos,halfWidth,t) smoothstep(halfWidth+gridSmoothWidth,halfWidth,abs(pos-(t)))
+#define drawPeriodicLine(freq,width,t) drawCrispLine(freq/2.0,width,abs(mod(t,freq)-(freq)/2.0))
+float drawGridLines(float axis){
+  return drawCrispLine(0.0,axisWidth,axis)+drawPeriodicLine(majorLineFrequency,majorLineWidth,axis)+drawPeriodicLine(minorLineFrequency,minorLineWidth,axis);
+}
+float drawGrid(vec2 space){return min(1.0,drawGridLines(space.x)+drawGridLines(space.y));}
+float random(float t){return(cos(t)+cos(t*1.3+1.3)+cos(t*1.4+1.4))/3.0;}
+float getPlasmaY(float x,float horizontalFade,float offset){
+  return random(x*lineFrequency+iTime*lineSpeed)*horizontalFade*lineAmplitude+offset;
+}
+void main(){
+  vec2 fragCoord=gl_FragCoord.xy;
+  vec2 uv=fragCoord/iResolution.xy;
+  vec2 space=(fragCoord-iResolution.xy/2.0)/iResolution.x*2.0*scale;
+  float horizontalFade=1.0-(cos(uv.x*6.28)*0.5+0.5);
+  float verticalFade=1.0-(cos(uv.y*6.28)*0.5+0.5);
+  space.y+=random(space.x*warpFrequency+iTime*warpSpeed)*warpAmplitude*(0.5+horizontalFade);
+  space.x+=random(space.y*warpFrequency+iTime*warpSpeed+2.0)*warpAmplitude*horizontalFade;
+  vec4 lines=vec4(0.0);
+  vec4 bgColor1=vec4(0.05,0.02,0.12,1.0);
+  vec4 bgColor2=vec4(0.12,0.04,0.22,1.0);
+  for(int l=0;l<linesPerGroup;l++){
+    float nli=float(l)/float(linesPerGroup);
+    float offsetTime=iTime*offsetSpeed;
+    float offsetPosition=float(l)+space.x*offsetFrequency;
+    float rand=random(offsetPosition+offsetTime)*0.5+0.5;
+    float halfWidth=mix(minLineWidth,maxLineWidth,rand*horizontalFade)/2.0;
+    float offset=random(offsetPosition+offsetTime*(1.0+nli))*mix(minOffsetSpread,maxOffsetSpread,horizontalFade);
+    float linePosition=getPlasmaY(space.x,horizontalFade,offset);
+    float line=drawSmoothLine(linePosition,halfWidth,space.y)/2.0+drawCrispLine(linePosition,halfWidth*0.15,space.y);
+    float circleX=mod(float(l)+iTime*lineSpeed,25.0)-12.0;
+    vec2 circlePosition=vec2(circleX,getPlasmaY(circleX,horizontalFade,offset));
+    float circle=drawCircle(circlePosition,0.01,space)*4.0;
+    line=line+circle;
+    lines+=line*lineColor*rand;
+  }
+  vec4 fragColor=mix(bgColor1,bgColor2,uv.x);
+  fragColor*=verticalFade;
+  fragColor.a=1.0;
+  fragColor+=lines;
+  gl_FragColor=fragColor;
+}`;
+
+function mkShader(type,src){
+  const s=gl.createShader(type);
+  gl.shaderSource(s,src);
+  gl.compileShader(s);
+  return s;
+}
+const prog=gl.createProgram();
+gl.attachShader(prog,mkShader(gl.VERTEX_SHADER,vs));
+gl.attachShader(prog,mkShader(gl.FRAGMENT_SHADER,fs));
+gl.linkProgram(prog);
+gl.useProgram(prog);
+
+const buf=gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+
+const posLoc=gl.getAttribLocation(prog,'aVertexPosition');
+gl.enableVertexAttribArray(posLoc);
+gl.vertexAttribPointer(posLoc,2,gl.FLOAT,false,0,0);
+
+const resLoc=gl.getUniformLocation(prog,'iResolution');
+const timeLoc=gl.getUniformLocation(prog,'iTime');
+const start=Date.now();
+
+function render(){
+  const t=(Date.now()-start)/1000;
+  gl.clearColor(0,0,0,1);
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.uniform2f(resLoc,canvas.width,canvas.height);
+  gl.uniform1f(timeLoc,t);
+  gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+  requestAnimationFrame(render);
+}
+render();
+
+// Scroll fade-in
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});
+},{threshold:0.12});
+document.querySelectorAll('.fi').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
