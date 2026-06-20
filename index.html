@@ -32,7 +32,12 @@ nav{
   border-bottom:1px solid var(--border);
 }
 .logo{font-family:var(--font-m);font-size:0.9rem;color:var(--accent);letter-spacing:0.08em}
-nav ul{list-style:none;display:flex;gap:2.2rem}
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:1rem;
+    flex-wrap:wrap;
+}
 nav ul a{text-decoration:none;color:var(--muted);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
 nav ul a:hover{color:var(--accent)}
 
@@ -196,6 +201,107 @@ footer{
 
 .fi{opacity:0;transform:translateY(20px);transition:opacity 0.65s ease,transform 0.65s ease}
 .fi.vis{opacity:1;transform:none}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+
+  nav{
+    padding:1rem;
+    flex-direction:column;
+    gap:1rem;
+  }
+
+  nav ul{
+    gap:1rem;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .wrap{
+    padding:0 1.2rem;
+  }
+
+  #hero{
+    text-align:center;
+    padding-top:10rem;
+  }
+
+  h1.name{
+    font-size:3rem;
+  }
+
+  .hero-sub{
+    max-width:100%;
+    font-size:0.9rem;
+  }
+
+  .btns{
+    justify-content:center;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+    padding:1.5rem;
+  }
+
+  .about-grid{
+    grid-template-columns:1fr;
+    gap:2rem;
+  }
+
+  .code-grid{
+    grid-template-columns:1fr;
+  }
+
+  .skills-g{
+    grid-template-columns:1fr;
+  }
+
+  .proj-g{
+    grid-template-columns:1fr;
+  }
+
+  .certs-g{
+    grid-template-columns:1fr;
+  }
+
+  .contact-c h2{
+    font-size:2rem;
+  }
+
+  .clinks{
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .info-row{
+    flex-direction:column;
+    gap:0.3rem;
+  }
+}
+
+/* EXTRA SMALL PHONES */
+@media (max-width: 480px){
+
+  h1.name{
+    font-size:2.4rem;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .contact-c h2{
+    font-size:1.7rem;
+  }
+
+  .proj-card,
+  .sk-card,
+  .cert-c{
+    padding:1rem;
+  }
+}
+
 </style>
 </head>
 <body>
